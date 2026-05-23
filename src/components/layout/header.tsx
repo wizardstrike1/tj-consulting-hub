@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { isMobile } from '@/components/util';
 import Magnetic from '@/components/animations/magnetic';
 import Image from 'next/image';
+import { assetPath } from '@/lib/utils';
 
 export default function Header() {
   const header = useRef(null);
@@ -28,7 +29,7 @@ export default function Header() {
               <Image
                 height={32}
                 width={32}
-                src="/images/TJHSST.png"
+                src={assetPath('/images/TJHSST.png')}
                 alt="TJ Consulting Club logo"
                 priority
               />
