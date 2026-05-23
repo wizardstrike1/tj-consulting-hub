@@ -6,6 +6,7 @@
 // works at the root.
 const isGithubPages = process.env.GITHUB_PAGES === 'true';
 const repoName = 'tj-consulting-hub';
+const basePath = isGithubPages ? `/${repoName}` : '';
 
 const nextConfig = {
   output: 'export', // static HTML export -> ./out
@@ -13,8 +14,12 @@ const nextConfig = {
   images: {
     unoptimized: true // required: Pages has no image-optimization server
   },
-  basePath: isGithubPages ? `/${repoName}` : '',
-  assetPrefix: isGithubPages ? `/${repoName}/` : ''
+  basePath,
+  assetPrefix: basePath ? `${basePath}/` : '',
+  // Exposed to the client so assetPath() can prefix hardcoded /public paths.
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath
+  }
 };
 
 export default nextConfig;
