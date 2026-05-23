@@ -5,7 +5,7 @@ import RoundedButton from '@/components/animations/roundedButton';
 import Link from 'next/link';
 
 export default function Description() {
-  const phrase1 = 'placeholder text for club description.';
+  const phrase1 = 'We explore where business meets science.';
 
   const description = useRef(null);
   const isInView = useInView(description);
@@ -39,12 +39,13 @@ export default function Description() {
           animate={isInView ? 'open' : 'closed'}
           className="m-0 pb-3 font-light sm:text-lg"
         >
-          placeholder text for club history
+          TJ Consulting Club is a student-run consulting source, exposing
+          students to real consulting techniques across business and science.
         </motion.p>
         <div data-scroll-speed={0.1}>
-          <Link href={'/about'}>
+          <Link href={'https://www.facebook.com/groups/1039748207555001'}>
             <RoundedButton className="absolute ml-56 mt-6 flex h-[100px] w-[100px] cursor-pointer items-center justify-center rounded-full bg-destructive text-white sm:ml-16 sm:mt-16 sm:h-[200px] sm:w-[200px]">
-              About Us
+              Join Us
             </RoundedButton>
           </Link>
         </div>

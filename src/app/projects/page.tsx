@@ -8,33 +8,33 @@ import { ModalContext } from './modalContext';
 
 const projects = [
   {
-    title: 'empty placeholder',
+    title: 'Websites Built',
     src: 'TJHSST.png',
-    tag: 'short description here',
+    tag: 'Web development',
     color: '#f4f4f5'
   },
   {
-    title: 'empty placeholder',
+    title: 'Slideshow Projects',
     src: 'TJHSST.png',
-    tag: 'short description here',
+    tag: 'Presentation design',
     color: '#f4f4f5'
   },
   {
-    title: 'empty placeholder',
+    title: 'Branding & Design',
     src: 'TJHSST.png',
-    tag: 'short description here',
+    tag: 'Visual identity',
     color: '#f4f4f5'
   },
   {
-    title: 'empty placeholder',
+    title: 'Competition Wins',
     src: 'TJHSST.png',
-    tag: 'short description here',
+    tag: 'Awards & recognition',
     color: '#f4f4f5'
   },
   {
-    title: 'empty placeholder',
+    title: 'Case Studies',
     src: 'TJHSST.png',
-    tag: 'short description here',
+    tag: 'Problem · solution · impact',
     color: '#f4f4f5'
   }
 ];

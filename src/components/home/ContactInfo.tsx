@@ -50,12 +50,14 @@ export default function ContactInfo() {
               backgroundColor="secondary"
               className=" absolute h-[100px] w-[100px] cursor-pointer items-center justify-center rounded-full bg-primary p-0 text-white sm:h-[200px] sm:w-[200px]"
             >
-              <Link href={'/about'}>Get in touch</Link>
+              <Link href={'mailto:tjofficialconsulting@gmail.com'}>
+                Request a Consultation
+              </Link>
             </RoundedButton>
           </motion.div>
         </div>
         <div className="mt-6 flex gap-5 sm:mx-[100px]">
-          <RoundedButton>placeholder@gmail.com</RoundedButton>
+          <RoundedButton>tjofficialconsulting@gmail.com</RoundedButton>
         </div>
 
         <div className="mt-20 flex flex-col justify-between p-5 2xs:mt-52 sm:mx-[100px] sm:mt-48 sm:flex-row">
@@ -66,10 +68,10 @@ export default function ContactInfo() {
           <div className="flex items-end gap-2">
             <span className="flex flex-col gap-3">
               <h3 className="m-0 cursor-default p-1 text-base font-light text-gray-500">
-                Version
+                Meetings
               </h3>
               <p className="relative m-0 cursor-pointer p-1">
-                2026 Consulting Club
+                8B Fridays &middot; Room 39
               </p>
             </span>
             <span className="flex flex-col gap-3">
@@ -93,6 +95,14 @@ export default function ContactInfo() {
                 </Link>
               </Magnetic>
             </span>
+            <Magnetic>
+              <Link
+                href="https://www.instagram.com/"
+                className={animatedUnderlineStyle}
+              >
+                Instagram
+              </Link>
+            </Magnetic>
           </div>
         </div>
       </div>
