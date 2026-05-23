@@ -31,7 +31,7 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
             key={index}
             className="flex h-60 w-1/2 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
           >
-            placeholder
+            Featured Project
           </div>
         ))}
       </motion.div>
@@ -44,7 +44,7 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
             key={index}
             className="flex h-60 w-3/4 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
           >
-            placeholder
+            Featured Project
           </div>
         ))}
       </motion.div>
