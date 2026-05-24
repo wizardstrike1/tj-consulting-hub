@@ -9,17 +9,22 @@ interface Props {
   className?: string;
 }
 
-// Track genuine pointer movement. A mouseenter can also fire when an element
-// scrolls under a stationary cursor — those should NOT trigger the fill (that
-// caused the fill to flash like a blob while scrolling).
-let lastPointerMove = 0;
+// While the page is scrolling, buttons slide under a (possibly stationary)
+// cursor and fire spurious mouseenter events, which flashed the fill like a
+// pink blob. Track scrolling globally and ignore hover fills during it.
+let isScrolling = false;
 if (typeof window !== 'undefined') {
+  let scrollTimer: ReturnType<typeof setTimeout>;
   window.addEventListener(
-    'pointermove',
+    'scroll',
     () => {
-      lastPointerMove = Date.now();
+      isScrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        isScrolling = false;
+      }, 200);
     },
-    { passive: true }
+    { passive: true, capture: true }
   );
 }
 
@@ -31,7 +36,7 @@ export default function RoundedButton({
   const circle = useRef(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const isHovered = useRef(false);
-  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     timeline.current = gsap.timeline({ paused: true });
@@ -49,16 +54,15 @@ export default function RoundedButton({
   }, []);
 
   const manageMouseEnter = () => {
-    // Ignore "hovers" caused by scrolling (no recent pointer movement).
-    if (Date.now() - lastPointerMove > 120) return;
+    // Ignore hovers that happen while the page is scrolling.
+    if (isScrolling) return;
     if (timeoutId.current) clearTimeout(timeoutId.current);
     isHovered.current = true;
     timeline.current!.tweenFromTo('enter', 'exit');
   };
 
   const manageMouseLeave = () => {
-    // Only play the exit if we actually entered, so a scroll-induced leave
-    // can't kick off the animation on its own.
+    // Only run the exit if we actually filled on a real hover.
     if (!isHovered.current) return;
     isHovered.current = false;
     timeoutId.current = setTimeout(() => {
