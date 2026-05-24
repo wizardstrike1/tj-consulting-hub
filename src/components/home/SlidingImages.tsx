@@ -20,7 +20,7 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
   return (
     <div
       ref={container}
-      className="relative z-10 mt-[200px] flex flex-col gap-[3vw] bg-background"
+      className="relative z-10 mt-[120px] flex flex-col gap-[3vw] bg-background"
     >
       <div className="relative flex flex-col gap-[3vw]">
         <motion.div
@@ -51,15 +51,15 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
         </motion.div>
 
         {/* Centered overlay sitting on top of the featured projects */}
-        <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center gap-5 px-4 text-center">
-          <h2 className="max-w-3xl text-3xl font-semibold text-foreground drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] sm:text-5xl">
+        <div className="pointer-events-none absolute inset-0 z-20 flex flex-row items-center justify-center gap-4 px-4 sm:gap-10">
+          <h2 className="max-w-[55%] text-2xl font-semibold text-foreground drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)] sm:max-w-xl sm:text-5xl">
             We explore where business meets science.
           </h2>
           <Link
             href={'https://www.facebook.com/groups/1039748207555001'}
-            className="pointer-events-auto"
+            className="pointer-events-auto shrink-0"
           >
-            <RoundedButton className="flex h-[110px] w-[110px] cursor-pointer items-center justify-center rounded-full bg-destructive text-white sm:h-[160px] sm:w-[160px]">
+            <RoundedButton className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full bg-destructive text-center text-white sm:h-[160px] sm:w-[160px]">
               Join Us
             </RoundedButton>
           </Link>
