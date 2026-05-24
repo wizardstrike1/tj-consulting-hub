@@ -9,14 +9,30 @@ interface Props {
   className?: string;
 }
 
+// Track genuine pointer movement. A mouseenter can also fire when an element
+// scrolls under a stationary cursor — those should NOT trigger the fill (that
+// caused the fill to flash like a blob while scrolling).
+let lastPointerMove = 0;
+if (typeof window !== 'undefined') {
+  window.addEventListener(
+    'pointermove',
+    () => {
+      lastPointerMove = Date.now();
+    },
+    { passive: true }
+  );
+}
+
 export default function RoundedButton({
   children,
   backgroundColor = 'secondary',
   ...attributes
 }: PropsWithChildren<Props>) {
   const circle = useRef(null);
-  let timeline = useRef<gsap.core.Timeline | null>(null);
-  let timeoutId: NodeJS.Timeout;
+  const timeline = useRef<gsap.core.Timeline | null>(null);
+  const isHovered = useRef(false);
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     timeline.current = gsap.timeline({ paused: true });
     timeline.current
@@ -33,12 +49,19 @@ export default function RoundedButton({
   }, []);
 
   const manageMouseEnter = () => {
-    if (timeoutId) clearTimeout(timeoutId);
+    // Ignore "hovers" caused by scrolling (no recent pointer movement).
+    if (Date.now() - lastPointerMove > 120) return;
+    if (timeoutId.current) clearTimeout(timeoutId.current);
+    isHovered.current = true;
     timeline.current!.tweenFromTo('enter', 'exit');
   };
 
   const manageMouseLeave = () => {
-    timeoutId = setTimeout(() => {
+    // Only play the exit if we actually entered, so a scroll-induced leave
+    // can't kick off the animation on its own.
+    if (!isHovered.current) return;
+    isHovered.current = false;
+    timeoutId.current = setTimeout(() => {
       timeline.current!.play();
     }, 300);
   };
