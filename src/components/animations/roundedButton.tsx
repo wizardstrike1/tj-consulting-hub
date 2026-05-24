@@ -9,12 +9,16 @@ interface Props {
   className?: string;
 }
 
-// While the page is scrolling, buttons slide under a (possibly stationary)
-// cursor and fire spurious mouseenter events, which flashed the fill like a
-// pink blob. Track scrolling globally and ignore hover fills during it.
-// We listen to wheel/touchmove (the raw inputs) because the site uses smooth
-// scrolling (locomotive-scroll), so the native `scroll` event may not fire.
+// Buttons slide under a (possibly stationary) cursor while the page scrolls,
+// firing spurious mouseenter events that flashed the fill like a pink blob.
+// Two guards make the fill respond to *real* hovers only:
+//  1. isScrolling — true during/just after scroll input (the site uses
+//     locomotive smooth scrolling, so we watch wheel/touchmove, not `scroll`).
+//  2. lastPointerMove — a real hover requires the cursor to actually move;
+//     scroll inertia moves the page, not the mouse, so a stale value means the
+//     "hover" came from the page gliding under the cursor.
 let isScrolling = false;
+let lastPointerMove = 0;
 if (typeof window !== 'undefined') {
   let scrollTimer: ReturnType<typeof setTimeout>;
   const markScrolling = () => {
@@ -26,6 +30,13 @@ if (typeof window !== 'undefined') {
   };
   ['wheel', 'touchmove', 'scroll'].forEach((ev) =>
     window.addEventListener(ev, markScrolling, { passive: true, capture: true })
+  );
+  window.addEventListener(
+    'pointermove',
+    () => {
+      lastPointerMove = Date.now();
+    },
+    { passive: true }
   );
 }
 
@@ -55,8 +66,10 @@ export default function RoundedButton({
   }, []);
 
   const manageMouseEnter = () => {
-    // Ignore hovers that happen while the page is scrolling.
+    // Only fill on a real hover: not while scrolling, and only if the cursor
+    // actually moved just now (not the page gliding under a still cursor).
     if (isScrolling) return;
+    if (Date.now() - lastPointerMove > 100) return;
     if (timeoutId.current) clearTimeout(timeoutId.current);
     isHovered.current = true;
     timeline.current!.tweenFromTo('enter', 'exit');
