@@ -5,22 +5,6 @@ import Layout from '@/components/layout';
 import AnimatedSection from '@/components/about/AnimatedSection';
 import ContrastCursor from '@/components/animations/cursor/contrastCursor';
 
-const steps = [
-  { title: 'Intake', detail: 'We meet to understand your needs.' },
-  { title: 'Strategy', detail: 'We design the goals and a structure.' },
-  { title: 'Execution', detail: 'We build — branding, websites, and more.' },
-  { title: 'Review', detail: 'We gather feedback and refine.' },
-  { title: 'Launch', detail: 'We hand off the finished project.' }
-];
-
-const skills = [
-  'Business skills',
-  'Technical skills',
-  'Teamwork',
-  'Competition',
-  'Management'
-];
-
 const officers = [
   { name: 'Aayush Katoch', role: 'President', year: '2026' },
   { name: 'Ram Katram', role: 'Vice President', year: '2028' },
@@ -55,71 +39,18 @@ export default function About() {
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={0.1}>
                 <p className="leading-relaxed text-foreground/70">
-                  We are a student-run consulting source: TJ students who advise
-                  real clients and build real solutions — from strategy to
-                  branding to finished websites.
+                  We are a student-run consulting source at Thomas Jefferson High
+                  School for Science and Technology. Interested in joining? We
+                  meet{' '}
+                  <span className="font-semibold text-foreground">
+                    8B on Fridays in Room 39
+                  </span>{' '}
+                  for lessons, activities, and work sessions on our current
+                  projects. (And you can get cookies!). You&apos;ll gain valuable
+                  business, technical, and management skills while working in a
+                  collaborative setting.
                 </p>
               </AnimatedSection>
-              <AnimatedSection animation="fade-up" delay={0.2}>
-                <p className="leading-relaxed text-foreground/70">
-                  We meet <span className="font-semibold text-foreground">8B
-                  on Fridays in Room 39</span> for mini-lessons, activities, and
-                  work sessions on our current project. And yes — you can get
-                  cookies.
-                </p>
-              </AnimatedSection>
-            </div>
-          </section>
-
-          {/* How We Work */}
-          <section className="py-12">
-            <AnimatedSection animation="fade-up">
-              <h2 className="mb-8 text-2xl font-bold text-foreground sm:text-3xl">
-                How We Work
-              </h2>
-            </AnimatedSection>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {steps.map((step, index) => (
-                <AnimatedSection
-                  key={step.title}
-                  animation="fade-up"
-                  delay={index * 0.08}
-                >
-                  <div className="h-full rounded-2xl border border-foreground/10 bg-white p-5 shadow-sm">
-                    <span className="text-sm font-semibold text-primary">
-                      Step {index + 1}
-                    </span>
-                    <h3 className="mt-1 text-lg font-semibold text-foreground">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-foreground/70">
-                      {step.detail}
-                    </p>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </section>
-
-          {/* Skills You'll Gain */}
-          <section className="py-12">
-            <AnimatedSection animation="fade-up">
-              <h2 className="mb-8 text-2xl font-bold text-foreground sm:text-3xl">
-                Skills You&apos;ll Gain
-              </h2>
-            </AnimatedSection>
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill, index) => (
-                <AnimatedSection
-                  key={skill}
-                  animation="fade-up"
-                  delay={index * 0.06}
-                >
-                  <span className="inline-block rounded-full border border-foreground/10 bg-foreground/5 px-5 py-2 text-base font-medium text-foreground">
-                    {skill}
-                  </span>
-                </AnimatedSection>
-              ))}
             </div>
           </section>
 
@@ -147,10 +78,6 @@ export default function About() {
                     <p className="text-sm text-foreground/60">
                       {officer.role} &middot; Class of {officer.year}
                     </p>
-                    <ul className="mt-2 space-y-1 text-sm text-foreground/70">
-                      <li>&bull; Favorite tool: placeholder</li>
-                      <li>&bull; Specialty: placeholder</li>
-                    </ul>
                   </div>
                 </AnimatedSection>
               ))}
