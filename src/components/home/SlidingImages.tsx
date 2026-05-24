@@ -51,8 +51,8 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
         </motion.div>
 
         {/* Centered overlay sitting on top of the featured projects */}
-        <div className="pointer-events-none absolute inset-0 z-20 flex flex-row items-center justify-center gap-4 px-4 sm:gap-10">
-          <h2 className="max-w-[55%] text-2xl font-semibold text-foreground drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)] sm:max-w-xl sm:text-5xl">
+        <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center gap-5 px-4 text-center sm:flex-row sm:gap-10">
+          <h2 className="max-w-md text-xl font-semibold text-foreground drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)] sm:max-w-xl sm:text-5xl">
             We explore where business meets science.
           </h2>
           <Link

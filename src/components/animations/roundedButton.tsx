@@ -12,19 +12,20 @@ interface Props {
 // While the page is scrolling, buttons slide under a (possibly stationary)
 // cursor and fire spurious mouseenter events, which flashed the fill like a
 // pink blob. Track scrolling globally and ignore hover fills during it.
+// We listen to wheel/touchmove (the raw inputs) because the site uses smooth
+// scrolling (locomotive-scroll), so the native `scroll` event may not fire.
 let isScrolling = false;
 if (typeof window !== 'undefined') {
   let scrollTimer: ReturnType<typeof setTimeout>;
-  window.addEventListener(
-    'scroll',
-    () => {
-      isScrolling = true;
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        isScrolling = false;
-      }, 200);
-    },
-    { passive: true, capture: true }
+  const markScrolling = () => {
+    isScrolling = true;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      isScrolling = false;
+    }, 250);
+  };
+  ['wheel', 'touchmove', 'scroll'].forEach((ev) =>
+    window.addEventListener(ev, markScrolling, { passive: true, capture: true })
   );
 }
 
