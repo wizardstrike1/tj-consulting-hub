@@ -59,7 +59,10 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
             href={'https://www.facebook.com/groups/1039748207555001'}
             className="pointer-events-auto shrink-0"
           >
-            <RoundedButton className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full bg-destructive text-center text-white sm:h-[160px] sm:w-[160px]">
+            <RoundedButton
+              backgroundColor="transparent"
+              className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full bg-destructive text-center text-white sm:h-[160px] sm:w-[160px]"
+            >
               Join Us
             </RoundedButton>
           </Link>
