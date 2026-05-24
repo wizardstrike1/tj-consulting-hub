@@ -22,40 +22,50 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
       ref={container}
       className="relative z-10 mt-[200px] flex flex-col gap-[3vw] bg-background"
     >
-      <motion.div
-        style={{ x: x1 }}
-        className="relative left-[-10vw] flex w-[300vw] gap-4 sm:w-[120vw] sm:gap-12"
-      >
-        {slider1.map((_, index) => (
-          <div
-            key={index}
-            className="flex h-60 w-1/2 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
+      <div className="relative flex flex-col gap-[3vw]">
+        <motion.div
+          style={{ x: x1 }}
+          className="relative left-[-10vw] flex w-[300vw] gap-4 sm:w-[120vw] sm:gap-12"
+        >
+          {slider1.map((_, index) => (
+            <div
+              key={index}
+              className="flex h-60 w-1/2 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
+            >
+              Featured Project
+            </div>
+          ))}
+        </motion.div>
+        <motion.div
+          style={{ x: x2 }}
+          className="relative left-[-10vw] flex  w-[300vw] gap-6 sm:w-[120vw] sm:gap-12"
+        >
+          {slider2.map((_, index) => (
+            <div
+              key={index}
+              className="flex h-60 w-3/4 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
+            >
+              Featured Project
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Centered overlay sitting on top of the featured projects */}
+        <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center gap-5 px-4 text-center">
+          <h2 className="max-w-3xl text-3xl font-semibold text-foreground drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] sm:text-5xl">
+            We explore where business meets science.
+          </h2>
+          <Link
+            href={'https://www.facebook.com/groups/1039748207555001'}
+            className="pointer-events-auto"
           >
-            Featured Project
-          </div>
-        ))}
-      </motion.div>
-      <div className="flex flex-col items-center gap-6 py-8 text-center">
-        <h2 className="max-w-3xl text-3xl font-medium sm:text-5xl">
-          We explore where business meets science.
-        </h2>
-        <Link href={'https://www.facebook.com/groups/1039748207555001'}>
-          <RoundedButton>Join Us</RoundedButton>
-        </Link>
+            <RoundedButton className="flex h-[110px] w-[110px] cursor-pointer items-center justify-center rounded-full bg-destructive text-white sm:h-[160px] sm:w-[160px]">
+              Join Us
+            </RoundedButton>
+          </Link>
+        </div>
       </div>
-      <motion.div
-        style={{ x: x2 }}
-        className="relative left-[-10vw] flex  w-[300vw] gap-6 sm:w-[120vw] sm:gap-12"
-      >
-        {slider2.map((_, index) => (
-          <div
-            key={index}
-            className="flex h-60 w-3/4 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
-          >
-            Featured Project
-          </div>
-        ))}
-      </motion.div>
+
       <div className="flex w-full justify-center">
         <Link href={'/projects'}>
           <RoundedButton>View Projects</RoundedButton>
