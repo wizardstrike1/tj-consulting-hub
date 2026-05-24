@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Magnetic from '@/components/animations/magnetic';
 import { clsx } from 'clsx';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 interface Props {
@@ -43,6 +44,7 @@ if (typeof window !== 'undefined') {
 export default function RoundedButton({
   children,
   backgroundColor = 'secondary',
+  className,
   ...attributes
 }: PropsWithChildren<Props>) {
   const circle = useRef(null);
@@ -88,7 +90,10 @@ export default function RoundedButton({
     <Magnetic>
       <Button
         variant="rounded"
-        className="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full border border-secondary px-4 py-6"
+        className={cn(
+          'relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full border border-secondary px-4 py-6',
+          className
+        )}
         style={{ overflow: 'hidden' }}
         onMouseEnter={() => {
           manageMouseEnter();
