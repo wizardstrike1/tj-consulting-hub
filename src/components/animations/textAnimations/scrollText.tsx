@@ -81,7 +81,10 @@ export function LetterCollision() {
   }, []);
 
   return (
-    <div ref={containerRef} className="scroll-smooth px-4 sm:px-8">
+    <div
+      ref={containerRef}
+      className="pointer-events-none relative z-20 scroll-smooth px-4 sm:px-8"
+    >
       <div className="flex min-h-screen flex-col justify-end pb-24 pt-28">
         <div className="flex flex-wrap items-end">
           <SentenceDisplay
