@@ -47,7 +47,7 @@ export default function ContactInfo() {
             className="absolute left-[calc(100%-200px)] top-[calc(100%+65px)] sm:left-[calc(100%-400px)] sm:top-[calc(100%-75px)]"
           >
             <RoundedButton
-              backgroundColor="transparent"
+              backgroundColor="secondary"
               className=" absolute h-[100px] w-[100px] cursor-pointer items-center justify-center rounded-full bg-primary p-0 text-white sm:h-[200px] sm:w-[200px]"
             >
               <Link href={'mailto:tjofficialconsulting@gmail.com'}>
