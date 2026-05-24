@@ -40,7 +40,7 @@ export default function RootTemplate({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-x-hidden">
+    <main className="min-h-screen overflow-x-clip">
       <AnimatePresence mode="wait">
         {isLoading && <PreLoader />}
       </AnimatePresence>

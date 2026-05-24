@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   return (
-    <div ref={scrollContainerRef} className="overflow-x-hidden">
+    <div ref={scrollContainerRef} className="overflow-x-clip">
       <LetterCollision />
       {showScrollButton && (
         <Magnetic>
