@@ -35,6 +35,14 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
           </div>
         ))}
       </motion.div>
+      <div className="flex flex-col items-center gap-6 py-8 text-center">
+        <h2 className="max-w-3xl text-3xl font-medium sm:text-5xl">
+          We explore where business meets science.
+        </h2>
+        <Link href={'https://www.facebook.com/groups/1039748207555001'}>
+          <RoundedButton>Join Us</RoundedButton>
+        </Link>
+      </div>
       <motion.div
         style={{ x: x2 }}
         className="relative left-[-10vw] flex  w-[300vw] gap-6 sm:w-[120vw] sm:gap-12"
