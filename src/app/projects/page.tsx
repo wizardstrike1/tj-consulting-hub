@@ -1,65 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
-import ProjectLink from '@/app/projects/projectLink';
-import Modal from '@/app/projects/project/modal';
-import Layout from '@/components/layout';
-import { ModalContext } from './modalContext';
+// The full projects page is archived in ./_archive/fullProjectsPage.tsx while
+// this route shows an under-construction notice.
 
-const projects = [
-  {
-    title: 'Websites Built',
-    src: 'TJHSST.png',
-    tag: 'Web development',
-    color: '#f4f4f5'
-  },
-  {
-    title: 'Slideshow Projects',
-    src: 'TJHSST.png',
-    tag: 'Presentation design',
-    color: '#f4f4f5'
-  },
-  {
-    title: 'Branding & Design',
-    src: 'TJHSST.png',
-    tag: 'Visual identity',
-    color: '#f4f4f5'
-  },
-  {
-    title: 'Competition Wins',
-    src: 'TJHSST.png',
-    tag: 'Awards & recognition',
-    color: '#f4f4f5'
-  },
-  {
-    title: 'Case Studies',
-    src: 'TJHSST.png',
-    tag: 'Problem · solution · impact',
-    color: '#f4f4f5'
-  }
-];
+import React from 'react';
+import Layout from '@/components/layout';
 
 export default function ProjectsHome() {
-  const [modal, setModal] = useState({ active: false, index: 0 });
   return (
-    <ModalContext.Provider value={{ modal, setModal }}>
-      <Layout title={'Our Projects'}>
-        <div className="m-0">
-          <div className="m-0 overflow-hidden">
-            {projects.map((project, index) => {
-              return (
-                <ProjectLink
-                  key={index}
-                  index={index}
-                  title={project.title}
-                  tag={project.tag}
-                />
-              );
-            })}
-          </div>
-          <Modal projects={projects} />
-        </div>
-      </Layout>
-    </ModalContext.Provider>
+    <Layout title={'Our Projects'}>
+      <div className="flex min-h-[30vh] flex-col justify-center gap-4 py-12">
+        <p className="text-xl font-medium leading-relaxed text-foreground/90 sm:text-2xl">
+          This page is under construction!
+        </p>
+        <p className="leading-relaxed text-foreground/70">
+          We&apos;re putting together a showcase of our work. Check back later!
+        </p>
+      </div>
+    </Layout>
   );
 }
