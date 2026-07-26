@@ -1,16 +1,47 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import Layout from '@/components/layout';
 import AnimatedSection from '@/components/about/AnimatedSection';
 import ContrastCursor from '@/components/animations/cursor/contrastCursor';
+import { assetPath } from '@/lib/utils';
 
-const officers = [
-  { name: 'Aayush Katoch', role: 'President', year: '2026' },
-  { name: 'Ram Katram', role: 'Vice President', year: '2028' },
-  { name: 'Sanjeev Subramanian', role: 'Secretary', year: '2026' },
-  { name: 'Pratham Singh', role: 'Activities Coordinator', year: '2026' },
-  { name: 'Nikhil Krishna', role: 'Webmaster', year: '2026' }
+type Officer = {
+  name: string;
+  role: string;
+  src: string;
+  year?: string;
+};
+
+const officers: Officer[] = [
+  {
+    name: 'Ram Katram',
+    role: 'President',
+    year: '2028',
+    src: 'officer-ram-katram.png'
+  },
+  {
+    name: 'Arnav Choudhary',
+    role: 'Vice President',
+    year: '2028',
+    src: 'officer-arnav-choudhary.png'
+  },
+  {
+    name: 'Belgutei Naran-Erdene',
+    role: 'Secretary',
+    src: 'officer-belgutei-naran-erdene.png'
+  },
+  {
+    name: 'Leo Su',
+    role: 'Webmaster',
+    src: 'officer-leo-su.png'
+  },
+  {
+    name: 'Arnav Arun Kumar',
+    role: 'Activities Coordinator',
+    src: 'officer-arnav-arun-kumar.png'
+  }
 ];
 
 export default function About() {
@@ -24,9 +55,13 @@ export default function About() {
               animation="fade-right"
               className="lg:sticky lg:top-32 lg:col-span-2 lg:self-start"
             >
-              <div className="flex aspect-[4/5] w-full max-w-sm items-center justify-center rounded-3xl bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40">
-                placeholder group image
-              </div>
+              <Image
+                src={assetPath('/images/about-group.png')}
+                alt="TJ Consulting Club officers"
+                width={795}
+                height={586}
+                className="w-full rounded-3xl"
+              />
             </AnimatedSection>
 
             <div className="space-y-6 lg:col-span-3">
@@ -69,14 +104,21 @@ export default function About() {
                   delay={index * 0.1}
                 >
                   <div className="flex h-full flex-col">
-                    <div className="flex aspect-square w-full items-center justify-center rounded-2xl bg-foreground/10 text-xs font-medium uppercase tracking-widest text-foreground/40">
-                      placeholder
+                    <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-foreground/10">
+                      <Image
+                        src={assetPath(`/images/${officer.src}`)}
+                        alt={officer.name}
+                        fill
+                        sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                        className="object-cover"
+                      />
                     </div>
                     <p className="mt-3 text-base font-semibold text-foreground">
                       {officer.name}
                     </p>
                     <p className="text-sm text-foreground/60">
-                      {officer.role} &middot; Class of {officer.year}
+                      {officer.role}
+                      {officer.year && <> &middot; Class of {officer.year}</>}
                     </p>
                   </div>
                 </AnimatedSection>
