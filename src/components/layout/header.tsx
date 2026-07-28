@@ -26,7 +26,7 @@ export default function Header() {
         <div className="hidden h-6 overflow-hidden leading-6 sm:block">
           <div className="ease-custom-cubic transition-transform duration-500 group-hover:-translate-y-6">
             <div className="whitespace-nowrap">TJ Consulting Club</div>
-            <div className="whitespace-nowrap">@ TJHSST</div>
+            <div className="whitespace-nowrap">Thomas Jefferson High School for Science and Technology</div>
           </div>
         </div>
       </Link>

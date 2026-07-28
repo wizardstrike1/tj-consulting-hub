@@ -1,15 +1,11 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Magnetic from '@/components/animations/magnetic';
 import RoundedButton from '@/components/animations/roundedButton';
 import Link from 'next/link';
 
-const getEstTime = () =>
-  new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' });
-
 export default function ContactInfo() {
-  const [timeNow, setTimeNow] = useState('');
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -21,15 +17,6 @@ export default function ContactInfo() {
     'relative after:absolute after:left-1/2 after:mt-0.5 after:block after:h-px after:w-0' +
     ' after:-translate-x-1/2 after:transform after:bg-white after:duration-200 ' +
     "after:ease-linear after:content-[''] hover:after:w-full";
-
-  useEffect(() => {
-    setTimeNow(getEstTime());
-    const interval = setInterval(() => {
-      setTimeNow(getEstTime());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <motion.div
@@ -60,8 +47,8 @@ export default function ContactInfo() {
           <RoundedButton>tjofficialconsulting@gmail.com</RoundedButton>
         </div>
 
-        <div className="mt-20 flex flex-col justify-between p-5 2xs:mt-52 sm:mx-[100px] sm:mt-48 sm:flex-row">
-          <p className="min-w-screen mb-5 text-base sm:max-w-xs">
+        <div className="mt-20 flex flex-col justify-between p-5 2xs:mt-52 sm:mx-[100px] sm:mt-48 sm:flex-row sm:items-end">
+          <p className="mb-5 text-base sm:max-w-xs">
             Thomas Jefferson High School for Science and Technology Website.
             Managed by Leo Su &amp; Hemanya Katram
           </p>
@@ -73,12 +60,6 @@ export default function ContactInfo() {
               <p className="relative m-0 cursor-pointer p-1">
                 8B Fridays &middot; Room 39
               </p>
-            </span>
-            <span className="flex flex-col gap-3">
-              <h3 className="m-0 cursor-default p-1 text-base font-light text-gray-500">
-                Timezone
-              </h3>
-              <p className="relative m-0 cursor-pointer p-1">{timeNow} EST</p>
             </span>
           </div>
           <div className="flex items-end gap-2">
