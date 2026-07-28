@@ -30,16 +30,19 @@ const officers: Officer[] = [
   {
     name: 'Belgutei Naran-Erdene',
     role: 'Secretary',
+    year: '2028',
     src: 'officer-belgutei-naran-erdene.png'
   },
   {
     name: 'Leo Su',
     role: 'Webmaster',
+    year: '2028',
     src: 'officer-leo-su.png'
   },
   {
     name: 'Arnav Arun Kumar',
     role: 'Activities Coordinator',
+    year: '2028',
     src: 'officer-arnav-arun-kumar.png'
   }
 ];
