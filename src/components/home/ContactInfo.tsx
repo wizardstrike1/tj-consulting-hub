@@ -58,7 +58,7 @@ export default function ContactInfo() {
                 Meetings
               </h3>
               <p className="relative m-0 cursor-pointer p-1">
-                8B Fridays &middot; Room 39
+                8A Wednesdays &middot; Room 214
               </p>
             </span>
           </div>

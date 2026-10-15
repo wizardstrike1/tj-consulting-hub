@@ -2,10 +2,12 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import RoundedButton from '@/components/animations/roundedButton';
 import Link from 'next/link';
+import Image from 'next/image';
+import { assetPath } from '@/lib/utils';
 
 type Props = {
-  slider1: number[];
-  slider2: number[];
+  slider1: { src: string; alt: string }[];
+  slider2: { src: string; alt: string }[];
 };
 
 export default function SlidingImages({ slider1, slider2 }: Props) {
@@ -27,12 +29,19 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
           style={{ x: x1 }}
           className="relative left-[-10vw] flex w-[300vw] gap-4 sm:w-[120vw] sm:gap-12"
         >
-          {slider1.map((_, index) => (
+          {slider1.map((image, index) => (
             <div
               key={index}
-              className="flex h-60 w-1/2 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
+              className="relative h-60 w-1/2 overflow-hidden rounded-3xl bg-foreground/10 shadow-lg sm:h-80 sm:w-1/4"
             >
-              Featured Project
+              <Image
+                src={assetPath(image.src)}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 640px) 30vw, 75vw"
+                className="object-cover"
+              />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/60" />
             </div>
           ))}
         </motion.div>
@@ -40,12 +49,19 @@ export default function SlidingImages({ slider1, slider2 }: Props) {
           style={{ x: x2 }}
           className="relative left-[-10vw] flex  w-[300vw] gap-6 sm:w-[120vw] sm:gap-12"
         >
-          {slider2.map((_, index) => (
+          {slider2.map((image, index) => (
             <div
               key={index}
-              className="flex h-60 w-3/4 items-center justify-center bg-foreground/10 text-lg font-medium uppercase tracking-widest text-foreground/40 shadow-lg sm:h-80 sm:w-1/4"
+              className="relative h-60 w-3/4 overflow-hidden rounded-3xl bg-foreground/10 shadow-lg sm:h-80 sm:w-1/4"
             >
-              Featured Project
+              <Image
+                src={assetPath(image.src)}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 640px) 30vw, 75vw"
+                className="object-cover"
+              />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/60" />
             </div>
           ))}
         </motion.div>

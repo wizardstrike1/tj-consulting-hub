@@ -10,40 +10,28 @@ import { assetPath } from '@/lib/utils';
 type Officer = {
   name: string;
   role: string;
-  src: string;
-  year?: string;
 };
 
 const officers: Officer[] = [
   {
     name: 'Ram Katram',
-    role: 'President',
-    year: '2028',
-    src: 'officer-ram-katram.png'
+    role: 'President'
   },
   {
     name: 'Arnav Choudhary',
-    role: 'Vice President',
-    year: '2028',
-    src: 'officer-arnav-choudhary.png'
+    role: 'Vice President'
   },
   {
     name: 'Belgutei Naran-Erdene',
-    role: 'Secretary',
-    year: '2028',
-    src: 'officer-belgutei-naran-erdene.png'
+    role: 'Secretary'
   },
   {
     name: 'Leo Su',
-    role: 'Webmaster',
-    year: '2028',
-    src: 'officer-leo-su.png'
+    role: 'Webmaster'
   },
   {
     name: 'Arnav Arun Kumar',
-    role: 'Activities Coordinator',
-    year: '2028',
-    src: 'officer-arnav-arun-kumar.png'
+    role: 'Activities Coordinator'
   }
 ];
 
@@ -53,35 +41,36 @@ export default function About() {
       <Layout title="About Us">
         <div>
           {/* Intro: group photo + who we are */}
-          <section className="grid gap-8 py-12 md:gap-12 lg:grid-cols-5 lg:gap-16">
+          <section className="grid gap-8 py-12 md:gap-12 lg:grid-cols-2 lg:gap-16">
             <AnimatedSection
               animation="fade-right"
-              className="lg:sticky lg:top-32 lg:col-span-2 lg:self-start"
+              className="lg:order-2 lg:self-start"
             >
               <Image
-                src={assetPath('/images/about-group.png')}
+                src={assetPath('/images/about-group.jpeg')}
                 alt="TJ Consulting Club officers"
-                width={795}
-                height={586}
-                className="w-full rounded-3xl"
+                width={4032}
+                height={3024}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-auto w-full rounded-3xl shadow-lg shadow-foreground/5"
               />
             </AnimatedSection>
 
-            <div className="space-y-6 lg:col-span-3">
+            <div className="flex flex-col gap-[clamp(1.5rem,3vw,4rem)] lg:order-1">
               <AnimatedSection animation="fade-up">
-                <p className="text-xl font-medium leading-relaxed text-foreground/90 sm:text-2xl">
+                <p className="text-xl font-medium leading-relaxed text-foreground/90 sm:text-2xl lg:text-[clamp(1.5rem,2.2vw,2.75rem)] lg:leading-snug">
                   TJ Consulting Club explores the overlap between the
                   professional fields of business and science, and exposes
                   students to real consulting techniques.
                 </p>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={0.1}>
-                <p className="leading-relaxed text-foreground/70">
+                <p className="text-lg leading-relaxed text-foreground/70 lg:text-[clamp(1.125rem,1.35vw,1.75rem)]">
                   We are a student-run consulting source at Thomas Jefferson High
                   School for Science and Technology. Interested in joining? We
                   meet{' '}
                   <span className="font-semibold text-foreground">
-                    8B on Fridays in Room 39
+                    8A on Wednesdays in Room 214
                   </span>{' '}
                   for lessons, activities, and work sessions on our current
                   projects. (And you can get cookies!). You&apos;ll gain valuable
@@ -99,33 +88,31 @@ export default function About() {
                 Club Officers
               </h2>
             </AnimatedSection>
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-              {officers.map((officer, index) => (
-                <AnimatedSection
-                  key={index}
-                  animation="fade-up"
-                  delay={index * 0.1}
-                >
-                  <div className="flex h-full flex-col">
-                    <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-foreground/10">
-                      <Image
-                        src={assetPath(`/images/${officer.src}`)}
-                        alt={officer.name}
-                        fill
-                        sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="mt-3 text-base font-semibold text-foreground">
-                      {officer.name}
-                    </p>
-                    <p className="text-sm text-foreground/60">
-                      {officer.role}
-                      {officer.year && <> &middot; Class of {officer.year}</>}
-                    </p>
-                  </div>
-                </AnimatedSection>
-              ))}
+            <div className="grid gap-8 md:gap-12 lg:grid-cols-2 lg:gap-16">
+              <AnimatedSection animation="fade-right" className="lg:self-start">
+                <Image
+                  src={assetPath('/images/officers-all.jpeg')}
+                  alt="TJ Consulting Club officer team"
+                  width={2856}
+                  height={2142}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="h-auto w-full rounded-3xl"
+                />
+              </AnimatedSection>
+              <AnimatedSection animation="fade-up" className="flex flex-col">
+                <ul className="flex flex-1 list-none flex-col justify-between gap-5 lg:gap-3">
+                  {officers.map((officer) => (
+                    <li key={officer.name}>
+                      <p className="text-xl font-semibold leading-tight text-foreground lg:text-[clamp(1.25rem,2vw,2.5rem)]">
+                        {officer.name}
+                      </p>
+                      <p className="mt-1 text-base text-foreground/60 lg:text-[clamp(1rem,1.2vw,1.5rem)]">
+                        {officer.role}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </AnimatedSection>
             </div>
           </section>
         </div>
