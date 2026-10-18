@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-// When building in the GitHub Pages workflow, the site is served from
-// https://<user>.github.io/<repo>/, so assets need to be prefixed with the
-// repo name. Locally (npm run dev / build) this stays empty so everything
-// works at the root.
-const isGithubPages = process.env.GITHUB_PAGES === 'true';
-const repoName = 'tj-consulting-hub';
-const basePath = isGithubPages ? `/${repoName}` : '';
+// The custom domain tjconsulting.org serves the site at the root,
+// including when built by the GitHub Pages workflow.
+const basePath = '';
 
 const nextConfig = {
   output: 'export', // static HTML export -> ./out
