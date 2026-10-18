@@ -5,6 +5,8 @@ export const ION_REDIRECT_URI = 'https://tjconsulting.org/auth/callback/';
 const TRANSACTION_KEY = 'tj-consulting:ion-transaction';
 const IDENTITY_KEY = 'tj-consulting:ion-identity';
 export const IDENTITY_EVENT = 'ion-identity-change';
+export const LOGIN_NOTICE_EVENT = 'ion-login-notice';
+const LOGIN_NOTICE_KEY = 'tj-consulting:ion-notice';
 const TRANSACTION_LIFETIME = 10 * 60 * 1000;
 
 export type IonIdentity = {
@@ -14,6 +16,28 @@ export type IonIdentity = {
 };
 
 type Transaction = { state: string; verifier: string; createdAt: number };
+
+export function saveLoginNotice(message: string) {
+  try { sessionStorage.setItem(LOGIN_NOTICE_KEY, message); }
+  catch { /* Navigation must still work when browser storage is unavailable. */ }
+}
+
+export function takeLoginNotice(): string | null {
+  try {
+    const message = sessionStorage.getItem(LOGIN_NOTICE_KEY);
+    sessionStorage.removeItem(LOGIN_NOTICE_KEY);
+    return message;
+  } catch { return null; }
+}
+
+export async function returnHomeAfterIonLogin() {
+  try { await completeIonLogin(); }
+  catch {
+    saveLoginNotice('Ion could not complete sign-in. Please try again later.');
+  } finally {
+    window.location.replace('/');
+  }
+}
 
 function base64url(bytes: Uint8Array): string {
   return btoa(String.fromCharCode(...bytes))

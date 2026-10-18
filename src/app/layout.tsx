@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Animations from './animations';
 import Header from '@/components/layout/header';
 import SiteAnalytics from '@/components/SiteAnalytics';
+import LoginNotice from '@/components/auth/LoginNotice';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -62,6 +63,7 @@ export default function RootLayout({
         <Animations>
           <main>
             <Header />
+            <LoginNotice />
             <div className="flex flex-col bg-background text-foreground">
               <main className={`flex-grow ${inter.className}`}>{children}</main>
               <SiteAnalytics />

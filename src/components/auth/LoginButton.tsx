@@ -1,11 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { IDENTITY_EVENT, IonIdentity, readIdentity, signOut } from '@/lib/ion-auth';
+import { beginIonLogin, IDENTITY_EVENT, IonIdentity, LOGIN_NOTICE_EVENT, readIdentity, saveLoginNotice, signOut } from '@/lib/ion-auth';
 
 export default function LoginButton() {
   const [identity, setIdentity] = useState<IonIdentity | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function login() {
+    if (busy) return;
+    setBusy(true);
+    try { await beginIonLogin(); }
+    catch (cause) {
+      saveLoginNotice(cause instanceof Error ? cause.message : 'Unable to open Ion. Please try again.');
+      window.dispatchEvent(new Event(LOGIN_NOTICE_EVENT));
+      setBusy(false);
+    }
+  }
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -30,13 +41,13 @@ export default function LoginButton() {
       <span className="hidden max-w-40 truncate text-sm lg:block" title={identity.name}>
         {identity.name}
       </span>
-      <button type="button" onClick={signOut} className="rounded-full border border-current px-4 py-2 text-sm transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+      <button type="button" onClick={signOut} className="whitespace-nowrap underline underline-offset-4 transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
         Log out
       </button>
     </div>
   ) : (
-    <Link href="/auth/login/" className="whitespace-nowrap rounded-full border border-current px-3 py-2 text-sm transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 sm:px-4">
-      Log in with Ion
-    </Link>
+    <button type="button" onClick={login} disabled={busy} aria-busy={busy} className="whitespace-nowrap underline underline-offset-4 transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 disabled:opacity-50">
+      Log in
+    </button>
   );
 }

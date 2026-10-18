@@ -9,6 +9,7 @@ async function setup() {
   const requests = [];
   const replies = [];
   let navigation;
+  const redirects = [];
   let cleaned = false;
   globalThis.sessionStorage = {
     getItem: (key) => storage.get(key) ?? null,
@@ -18,7 +19,8 @@ async function setup() {
   globalThis.window = {
     location: {
       origin: 'https://tjconsulting.org', pathname: '/auth/callback/', search: '',
-      assign: (url) => { navigation = new URL(url); }
+      assign: (url) => { navigation = new URL(url); },
+      replace: (url) => { redirects.push(url); }
     },
     history: { replaceState: () => { cleaned = true; } },
     dispatchEvent: () => {}
@@ -36,7 +38,7 @@ async function setup() {
   const identityKey = 'tj-consulting:ion-identity';
   const transaction = JSON.parse(storage.get(transactionKey));
   window.location.search = `?state=${transaction.state}&code=test-authorization-code`;
-  return { auth, storage, requests, replies, transaction, transactionKey, identityKey, navigation };
+  return { auth, storage, requests, replies, transaction, transactionKey, identityKey, navigation, redirects };
 }
 
 const json = (body) => ({ ok: true, json: async () => body });
@@ -123,4 +125,23 @@ test('expired cached identity is removed', async () => {
   storage.set(identityKey, JSON.stringify({ name: 'Test', username: 'tester', expiresAt: Date.now() - 1 }));
   assert.equal(auth.readIdentity(), null);
   assert.equal(storage.has(identityKey), false);
+});
+
+test('successful callback returns home with identity and no error notice', async () => {
+  const { auth, replies, redirects } = await setup();
+  replies.push(validToken(), json({ ion_username: '2028tester' }));
+  await auth.returnHomeAfterIonLogin();
+  assert.deepEqual(redirects, ['/']);
+  assert.equal(auth.readIdentity().username, '2028tester');
+  assert.equal(auth.takeLoginNotice(), null);
+});
+
+test('failed callback returns home with a one-time notice and no identity', async () => {
+  const { auth, replies, redirects } = await setup();
+  replies.push(new TypeError('Failed to fetch'));
+  await auth.returnHomeAfterIonLogin();
+  assert.deepEqual(redirects, ['/']);
+  assert.equal(auth.readIdentity(), null);
+  assert.match(auth.takeLoginNotice(), /Ion could not complete sign-in/);
+  assert.equal(auth.takeLoginNotice(), null);
 });
