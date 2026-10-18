@@ -4,13 +4,12 @@ import React, { ReactNode } from 'react';
 import { Metadata } from 'next';
 import Animations from './animations';
 import Header from '@/components/layout/header';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import SiteAnalytics from '@/components/SiteAnalytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tjconsulting.club';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tjconsulting.org';
 
 const metaDescription =
   'TJ Consulting Club at Thomas Jefferson High School for Science and Technology — student consultants solving real-world problems.';
@@ -59,14 +58,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SpeedInsights />
       <body className="overflow-scroll overflow-x-hidden">
         <Animations>
           <main>
             <Header />
             <div className="flex flex-col bg-background text-foreground">
               <main className={`flex-grow ${inter.className}`}>{children}</main>
-              <Analytics />
+              <SiteAnalytics />
             </div>
           </main>
         </Animations>
