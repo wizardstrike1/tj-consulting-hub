@@ -60,16 +60,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="overflow-scroll overflow-x-hidden">
-        <Animations>
-          <main>
-            <Header />
-            <LoginNotice />
-            <div className="flex flex-col bg-background text-foreground">
-              <main className={`flex-grow ${inter.className}`}>{children}</main>
-              <SiteAnalytics />
-            </div>
-          </main>
-        </Animations>
+        <main className="mobile-notice">
+          hi sorry im still working on support for mobile
+        </main>
+        <div className="desktop-site">
+          <Animations>
+            <main>
+              <Header />
+              <LoginNotice />
+              <div className="flex flex-col bg-background text-foreground">
+                <main className={`flex-grow ${inter.className}`}>{children}</main>
+                <SiteAnalytics />
+              </div>
+            </main>
+          </Animations>
+        </div>
       </body>
     </html>
   );

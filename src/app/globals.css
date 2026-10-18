@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+.mobile-notice {
+  display: none;
+}
+
+/* Include landscape phones as well as narrow browser windows. */
+@media (max-width: 767px), (hover: none) and (pointer: coarse) and (max-width: 1023px) {
+  .desktop-site {
+    display: none;
+  }
+
+  .mobile-notice {
+    display: block;
+    min-height: 100svh;
+    padding: 16px;
+    background: white;
+    color: black;
+    font: 16px/1.5 Arial, sans-serif;
+  }
+
+  html,
+  body {
+    background: white;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%; /* eddfef pale purple 0 100% 100%; */
