@@ -6,6 +6,7 @@ import Animations from './animations';
 import Header from '@/components/layout/header';
 import SiteAnalytics from '@/components/SiteAnalytics';
 import LoginNotice from '@/components/auth/LoginNotice';
+import AuthProvider from '@/components/auth/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -64,16 +65,18 @@ export default function RootLayout({
           hi sorry im still working on support for mobile
         </main>
         <div className="desktop-site">
-          <Animations>
-            <main>
-              <Header />
-              <LoginNotice />
-              <div className="flex flex-col bg-background text-foreground">
-                <main className={`flex-grow ${inter.className}`}>{children}</main>
-                <SiteAnalytics />
-              </div>
-            </main>
-          </Animations>
+          <AuthProvider>
+            <Animations>
+              <main>
+                <Header />
+                <LoginNotice />
+                <div className="flex flex-col bg-background text-foreground">
+                  <main className={`flex-grow ${inter.className}`}>{children}</main>
+                  <SiteAnalytics />
+                </div>
+              </main>
+            </Animations>
+          </AuthProvider>
         </div>
       </body>
     </html>

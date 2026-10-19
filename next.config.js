@@ -1,14 +1,13 @@
 /** @type {import('next').NextConfig} */
 
-// The custom domain tjconsulting.org serves the site at the root,
-// including when built by the GitHub Pages workflow.
+// The custom domain serves the site at the root. Authentication route handlers
+// need a Node runtime (Vercel or next start), so this is no longer a static export.
 const basePath = '';
 
 const nextConfig = {
-  output: 'export', // static HTML export -> ./out
   trailingSlash: true, // emit /about/index.html so Pages serves clean URLs
   images: {
-    unoptimized: true // required: Pages has no image-optimization server
+    unoptimized: true
   },
   basePath,
   assetPrefix: basePath ? `${basePath}/` : '',
