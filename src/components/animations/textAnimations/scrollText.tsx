@@ -5,7 +5,8 @@ import React, { MutableRefObject, useEffect, useRef } from 'react';
 gsap.registerPlugin(ScrollTrigger);
 
 const line1 = 'Consulting Club';
-const line2 = 'Thomas Jefferson High School for Science and Technology';
+const schoolLines = ['Thomas Jefferson High School', 'for Science and Technology'];
+const line2 = schoolLines.join(' ');
 
 function getRandomSpeed() {
   const randomDecimal = Math.random();
@@ -93,12 +94,16 @@ export function LetterCollision() {
             className="leading-none"
           />
         </div>
-        <div aria-label={line2} className="mt-3 flex flex-wrap items-end gap-y-[0.2em] text-[clamp(1rem,3.4cqw,5.1rem)] leading-none sm:mt-6">
-          <SentenceDisplay
-            text={line2}
-            gap="w-[0.22em] shrink-0"
-            className="leading-none"
-          />
+        <div aria-label={line2} className="mt-3 flex flex-col gap-[0.2em] text-[clamp(1rem,4.2cqw,6.3rem)] leading-none sm:mt-6">
+          {schoolLines.map((line) => (
+            <div key={line} className="flex flex-nowrap items-end whitespace-nowrap">
+              <SentenceDisplay
+                text={line}
+                gap="w-[0.22em] shrink-0"
+                className="leading-none"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
