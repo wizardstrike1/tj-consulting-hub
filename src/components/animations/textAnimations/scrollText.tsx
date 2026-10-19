@@ -5,7 +5,7 @@ import React, { MutableRefObject, useEffect, useRef } from 'react';
 gsap.registerPlugin(ScrollTrigger);
 
 const line1 = 'Consulting Club';
-const line2 = 'Thomas Jefferson High School for Science And Technology';
+const line2 = 'Thomas Jefferson High School for Science and Technology';
 
 function getRandomSpeed() {
   const randomDecimal = Math.random();
@@ -45,7 +45,7 @@ const animateLettersOnScroll = (containerRef: MutableRefObject<any>) => {
 // breaks across lines — only whole words wrap on small screens.
 function Word({ word, className }: { word: string; className: string }) {
   return (
-    <div className="flex">
+    <div className="flex shrink-0">
       {word.split('').map((letter, index) => (
         <div key={index} className={`letter font-semibold ${className}`}>
           {letter}
@@ -66,8 +66,8 @@ function SentenceDisplay({
 }) {
   return text.split(' ').map((word, index) => (
     <React.Fragment key={index}>
+      {index > 0 && <div aria-hidden="true" className={gap}></div>}
       <Word word={word} className={className} />
-      <div className={gap}></div>
     </React.Fragment>
   ));
 }
@@ -83,21 +83,21 @@ export function LetterCollision() {
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none relative z-20 scroll-smooth px-4 sm:px-8"
+      className="pointer-events-none relative z-20 scroll-smooth px-4 [container-type:inline-size] sm:px-8"
     >
       <div className="flex min-h-screen flex-col justify-end pb-24 pt-28">
-        <div className="flex flex-wrap items-end">
+        <div aria-label={line1} role="heading" aria-level={1} className="flex flex-nowrap items-end whitespace-nowrap text-[clamp(2rem,12cqw,18rem)] leading-none">
           <SentenceDisplay
             text={line1}
-            gap="w-2 xs:w-4 sm:w-10"
-            className="text-5xl leading-none xs:text-7xl sm:text-8xl md:text-[120px] lg:text-[150px] xl:text-[210px]"
+            gap="w-[0.22em] shrink-0"
+            className="leading-none"
           />
         </div>
-        <div className="mt-3 flex flex-wrap items-end sm:mt-6">
+        <div aria-label={line2} className="mt-3 flex flex-wrap items-end gap-y-[0.2em] text-[clamp(1rem,3.4cqw,5.1rem)] leading-none sm:mt-6">
           <SentenceDisplay
             text={line2}
-            gap="w-1.5 xs:w-2 sm:w-4"
-            className="text-xl leading-none xs:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+            gap="w-[0.22em] shrink-0"
+            className="leading-none"
           />
         </div>
       </div>
