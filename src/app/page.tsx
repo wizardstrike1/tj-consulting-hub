@@ -5,6 +5,8 @@ import SlidingImages from '@/components/home/SlidingImages';
 import ContrastCursor from '@/components/animations/cursor/contrastCursor';
 import { LetterCollision } from '@/components/animations/textAnimations/scrollText';
 import Magnetic from '@/components/animations/magnetic';
+import Image from 'next/image';
+import { assetPath } from '@/lib/utils';
 
 const slider1 = [
   { src: '/images/featured/student-profile.jpeg', alt: 'Student sitting indoors' },
@@ -44,12 +46,26 @@ export default function Home() {
   };
 
   return (
-    <div ref={scrollContainerRef} className="overflow-x-clip">
-      <LetterCollision />
+    <div ref={scrollContainerRef} className="relative isolate overflow-x-clip">
+      <div className="relative">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[calc(100%+20vh)]">
+          <Image
+            src={assetPath('/images/home-campus.webp')}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-white/60" />
+          <div className="absolute inset-x-0 bottom-0 h-[20vh] bg-gradient-to-b from-transparent to-background" />
+        </div>
+        <LetterCollision />
+      </div>
       {showScrollButton && (
         <Magnetic>
           <div
-            className="fixed bottom-4 right-8 flex cursor-pointer items-center space-x-2 text-3xl font-semibold sm:bottom-8"
+            className="fixed bottom-4 right-8 z-20 flex cursor-pointer items-center space-x-2 text-3xl font-semibold sm:bottom-8"
             onClick={scrollToHero}
           >
             <p>Scroll</p>
