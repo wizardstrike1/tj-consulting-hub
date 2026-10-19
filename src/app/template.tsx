@@ -7,7 +7,6 @@ import {
   useTransform
 } from 'framer-motion';
 import ContactInfo from '@/components/home/ContactInfo';
-import { isMobile } from '@/components/util';
 import { clsx } from 'clsx';
 import { usePathname } from 'next/navigation';
 import PreLoader from '@/components/animations/preLoader';
@@ -19,8 +18,7 @@ export default function RootTemplate({ children }: PropsWithChildren) {
     offset: ['start end', 'end start']
   });
 
-  const input = isMobile() ? 0.9 : 1.2;
-  const height = useTransform(scrollYProgress, [0, input], [50, 0]);
+  const height = useTransform(scrollYProgress, [0, 0.65, 1], [50, 45, 0]);
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname().split('/').pop();
 
@@ -44,9 +42,9 @@ export default function RootTemplate({ children }: PropsWithChildren) {
       <AnimatePresence mode="wait">
         {isLoading && <PreLoader />}
       </AnimatePresence>
-      <div ref={container} className={clsx('relative z-10', bgColour)}>
+      <div ref={container} className={clsx('relative z-10 flex min-h-[100svh] flex-col', bgColour)}>
         {children}
-        <motion.div style={{ height }} className="relative">
+        <motion.div style={{ height }} className="relative mt-auto shrink-0">
           <div
             className={clsx(
               'absolute left-[-10%] z-10 h-[1050%] w-[120%] rounded-b-[100%] shadow-[0_60px_50px_0px_rgba(0,0,0,0.748)]',

@@ -12,17 +12,15 @@ export default function ContactInfo() {
     offset: ['start end', 'end end']
   });
   const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const y = useTransform(scrollYProgress, [0, 1], [-500, 0]);
   const animatedUnderlineStyle =
     'relative after:absolute after:left-1/2 after:mt-0.5 after:block after:h-px after:w-0' +
     ' after:-translate-x-1/2 after:transform after:bg-white after:duration-200 ' +
     "after:ease-linear after:content-[''] hover:after:w-full";
 
   return (
-    <motion.div
-      style={{ y }}
+    <footer
       ref={container}
-      className="relative flex min-h-screen flex-col items-center justify-between bg-foreground p-6 pt-32 text-white sm:justify-center"
+      className="relative flex min-h-[100svh] flex-col items-center justify-between bg-foreground p-6 pt-32 text-white sm:justify-center"
     >
       <div className="w-full bg-foreground pt-[150px] sm:max-w-[1800px]">
         <div className="relative border-b border-gray-600 pb-12 sm:mx-[100px]">
@@ -93,6 +91,6 @@ export default function ContactInfo() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </footer>
   );
 }

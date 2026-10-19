@@ -60,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="overflow-scroll overflow-x-hidden">
+      <body className="overflow-scroll overflow-x-hidden" suppressHydrationWarning>
         <main className="mobile-notice">
           hi sorry im still working on support for mobile
         </main>
