@@ -10,6 +10,17 @@ Use Node 22 or newer. Install with `npm ci`, then run `npm run dev`.
 Run auth regression checks with `npm run test:auth` and build with `npm run build`.
 A self-hosted production server can run with `npm start` after the build.
 
+## Frontend preview
+
+Double-click `Preview Website.cmd` in this folder, or run `npm run dev:preview`.
+Open http://127.0.0.1:3000 in your browser. Leave the terminal running while
+working; saved frontend edits appear automatically without a build or deployment.
+Press Ctrl+C in the terminal to stop the preview.
+
+This preview runs only on this computer and does not update tjconsulting.org.
+Use it to review frontend changes before publishing. Ion sign-in still needs
+the local OAuth environment and redirect URI described below to test locally.
+
 ## Server environment
 
 Copy `.env.example` to `.env.local` for local work. Never commit secrets.
